@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Car Price Prediction</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Car Price Prediction</h1>
+        <form action="/predict_price" method="post" id="carForm">
+            <label for="company">Select Company:</label>
+            <select name="company" id="company">
+                <option value="">SELECT</option>
+                {% for c in companies %}
+                    <option value="{{ c }}">{{ c }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="car_model">Select Model:</label>
+            <select name="car_model" id="car_model">
+                <option value="">SELECT</option>
+            </select>
+
+            <label for="year">Select Year:</label>
+            <select name="year" id="year">
+                <option value="">SELECT</option>
+                {% for y in years %}
+                    <option value="{{ y }}">{{ y }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="fuel_type">Select Fuel Type:</label>
+            <select name="fuel_type" id="fuel_type">
+                <option value="">SELECT</option>
+                {% for fuel in fuel_type %}
+                    <option value="{{ fuel }}">{{ fuel }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="kms">Number of KMs Driven:</label>
+            <input type="text" name="kms" id="kms" required>
+
+            <input type="submit" value="Predict Price">
+        </form>
+
+        <!-- Display the predicted price and details -->
+        {% if details %}
+            <div class="prediction">
+                <p id="predictionMessage">Company: {{ details.company }}, Model: {{ details.model }}, Fuel Type: {{ details.fuel_type }}, Predicted Price: ₹{{ details.predicted_price }}</p>
+            </div>
+        {% endif %}
+
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#company").change(function () {
+                    var selectedCompany = $(this).val();
+                    $.ajax({
+                        url: "/get_models/" + selectedCompany,
+                        type: "GET",
+                        success: function (data) {
+                            var carModelsDropdown = $("#car_model");
+                            carModelsDropdown.empty().append('<option value="">SELECT</option>');
+                            $.each(data.models, function(index, value) {
+                                carModelsDropdown.append('<option value="' + value + '">' + value + '</option>');
+                            });
+                        },
+                        error: function (error) {
+                            console.log("Error fetching models:", error);
+                        }
+                    });
+                });
+            });
+        </script>        
+    </div>
+</body>
+</html>

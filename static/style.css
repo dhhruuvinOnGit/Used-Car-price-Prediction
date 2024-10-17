@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+body {
+    background-image: url("{{ url_for('static', filename='image/_11b36fad-52cd-4246-833a-6d33a8373c4d.jpeg') }}");
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #007BFF;
+}
+
+h1 {
+    text-align: center;
+    color: #007BFF;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 16px; /* Adjust the font size as needed */
+}
+
+select, input {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px; /* Adjust the font size as needed */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    padding: 15px; /* Adjust the padding as needed */
+    font-size: 16px; /* Adjust the font size as needed */
+    border: none;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Additional styling for the prediction message */
+.prediction {
+    text-align: center;
+    margin-top: 20px;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usec Car Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Used Car Price Predictor</h1>
+        <form action="/predict_price" method="post" id="detailform">
+            <label for="brand">Select Brand:</label>
+            <select name="brand" id="brand">
+                <option value="">SELECT</option>
+                {% for c in brand %}
+                <option value="{{ c }}">{{ c }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+</body>
+</html>
